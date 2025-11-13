@@ -49,9 +49,29 @@ export default function UsersPage() {
               <td className="p-2">{u.role}</td>
               <td className="p-2">{u.banned ? "✅ Yes" : "❌ No"}</td>
               <td className="p-2 space-x-2">
-                <Button onClick={() => handleAction(u.id, "ban")} variant="destructive" size="sm">Ban</Button>
-                <Button onClick={() => handleAction(u.id, "unban")} variant="secondary" size="sm">Unban</Button>
-                <Button onClick={() => handleAction(u.id, "revoke")} variant="outline" size="sm">Revoke</Button>
+                {/* Ban */}
+                <Button
+                  onClick={() => handleAction(u.id, "ban")}
+                  variant="danger"
+                >
+                  Ban
+                </Button>
+
+                {/* Unban */}
+                <Button
+                  onClick={() => handleAction(u.id, "unban")}
+                  variant="primary"
+                >
+                  Unban
+                </Button>
+
+                {/* Revoke */}
+                <Button
+                  onClick={() => handleAction(u.id, "revoke")}
+                  variant="ghost"
+                >
+                  Revoke
+                </Button>
               </td>
             </tr>
           ))}
