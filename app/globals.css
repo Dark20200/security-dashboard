@@ -1,0 +1,259 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 10s linear infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 10s linear infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes welcome {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(5px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-welcome {
+  animation: welcome 1s ease-out forwards;
+}
+
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spin-slow 10s linear infinite; }
+
+@keyframes pulse-glow {
+  0%,100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+}
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+/* الخلفية تتحرك حركة ناعمة */
+@keyframes bg-move {
+  0% { background-position: 0 0; }
+  50% { background-position: 50px 25px; }
+  100% { background-position: 0 0; }
+}
+.animate-bg-move {
+  animation: bg-move 30s linear infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spin-slow 10s linear infinite; }
+
+@keyframes pulse-glow {
+  0%,100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+}
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+@keyframes bg-move {
+  0% { background-position: 0 0; }
+  50% { background-position: 50px 25px; }
+  100% { background-position: 0 0; }
+}
+.animate-bg-move { animation: bg-move 30s linear infinite; }
+
+/* ✨ ضوء متحرك عبر النص */
+.shimmer-text {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+.shimmer-text::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -150%;
+  width: 150%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+  animation: shimmer 4s infinite;
+}
+@keyframes shimmer {
+  0% { left: -150%; }
+  50% { left: 100%; }
+  100% { left: 150%; }
+}
+
+/* Cyber shimmer light animation */
+.shimmer-text {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+.shimmer-text::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+  animation: shimmer 5s linear infinite;
+}
+@keyframes shimmer {
+  0% { left: -150%; }
+  50% { left: 100%; }
+  100% { left: 150%; }
+}
+
+/* slow spin and background glow */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spin-slow 10s linear infinite; }
+
+@keyframes pulse-glow {
+  0%,100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+}
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+@keyframes bg-move {
+  0% { background-position: 0 0; }
+  50% { background-position: 50px 25px; }
+  100% { background-position: 0 0; }
+}
+.animate-bg-move { animation: bg-move 30s linear infinite; }
+
+/* Animated Gradient Text Effect */
+.animated-gradient-text {
+  background-image: linear-gradient(
+    90deg,
+    #7c3aed,
+    #c084fc,
+    #f472b6,
+    #7c3aed
+  );
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow 5s ease infinite;
+}
+
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* أول مرحلة ثابتة أثناء النزول */
+.static-gradient-text {
+  background: linear-gradient(90deg, #a78bfa, #c084fc, #f472b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* بعدها تبدأ حركة الألوان */
+.animated-gradient-text {
+  background: linear-gradient(90deg, #7c3aed, #c084fc, #f472b6, #7c3aed);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow 5s ease infinite;
+}
+
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* توهج خفيف حوالين النص */
+.glow-text {
+  text-shadow: 0 0 10px rgba(156, 81, 255, 0.6),
+               0 0 20px rgba(147, 51, 234, 0.5),
+               0 0 40px rgba(139, 92, 246, 0.3);
+}
+
+/* باقي الحركات */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spin-slow 10s linear infinite; }
+
+@keyframes pulse-glow {
+  0%,100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+}
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+@keyframes bg-move {
+  0% { background-position: 0 0; }
+  50% { background-position: 50px 25px; }
+  100% { background-position: 0 0; }
+}
+.animate-bg-move { animation: bg-move 30s linear infinite; }
