@@ -8,11 +8,13 @@ import { Role, RequestStatus } from "@prisma/client";
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as any,
   session: { strategy: "jwt" },
+
   providers: [
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID!,
       clientSecret: process.env.DISCORD_CLIENT_SECRET!,
       authorization: { params: { scope: "identify email" } },
+
       profile(profile) {
         return {
           id: profile.id,
@@ -27,16 +29,21 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-    // ✅ تسجيل الدخول
+    /** ---------------------------------------
+     *  🔥  Sign In Flow (مهم جدًا)
+     * ----------------------------------------*/
     async signIn({ account, user }) {
       const discordId = account?.providerAccountId;
       if (!discordId) return false;
 
       const isOwner = OWNERS.includes(discordId);
 
-      // 🔍 تحقق أو أنشئ المستخدم في قاعدة البيانات
-      let dbUser = await prisma.user.findUnique({ where: { id: user.id } });
+      // 🟪 Check existing DB user
+      let dbUser = await prisma.user.findUnique({
+        where: { id: user.id },
+      });
 
+      // 🟪 Create user if not exists
       if (!dbUser) {
         dbUser = await prisma.user.create({
           data: {
@@ -49,7 +56,7 @@ export const authOptions: NextAuthOptions = {
         });
       }
 
-      // 🔗 اربط حساب Discord بالمستخدم (لمنع OAuthAccountNotLinked)
+      // 🟪 Link discord account
       await prisma.account.upsert({
         where: {
           provider_providerAccountId: {
@@ -66,7 +73,7 @@ export const authOptions: NextAuthOptions = {
         },
       });
 
-      // 👑 لو المستخدم Owner، تأكد إن الدور محدث
+      // 🟪 Make sure OWNERS always stay OWNER
       if (isOwner && dbUser.role !== Role.OWNER) {
         await prisma.user.update({
           where: { id: dbUser.id },
@@ -74,10 +81,13 @@ export const authOptions: NextAuthOptions = {
         });
       }
 
-      // 🚫 لو المستخدم Pending → سجل طلب وصول إن مش موجود
+      // 🟪 Pending Users → redirect
       if (!isOwner && dbUser.role === Role.PENDING) {
         const existingReq = await prisma.accessRequest.findFirst({
-          where: { userId: dbUser.id, status: RequestStatus.PENDING },
+          where: {
+            userId: dbUser.id,
+            status: RequestStatus.PENDING,
+          },
         });
 
         if (!existingReq) {
@@ -90,14 +100,18 @@ export const authOptions: NextAuthOptions = {
         }
 
         console.log("🕓 Pending user:", user.name);
-        return "/request-pending"; // يروح لصفحة الانتظار
+
+        // ⭐ هذا الخط هو المهم → redirect صحيح 100%
+        return "/request-pending";
       }
 
       console.log("✅ Approved or Owner:", user.name);
       return true;
     },
 
-    // 🧠 تحديث التوكن (JWT)
+    /** ---------------------------------------
+     *  🔥 JWT Token
+     * ----------------------------------------*/
     async jwt({ token, user }) {
       if (user) {
         const dbUser = await prisma.user.findUnique({
@@ -111,7 +125,9 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
 
-    // 💾 تعديل بيانات الجلسة
+    /** ---------------------------------------
+     *  🔥 Session Object
+     * ----------------------------------------*/
     async session({ session, token }) {
       if (session.user) {
         (session.user as any).id = token.uid;
