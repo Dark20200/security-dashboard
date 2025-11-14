@@ -63,7 +63,7 @@ export default function DashboardLayout({
       {/* Sidebar ثابت */}
       <Sidebar />
 
-      {/* محتوى رئيسي */}
+      {/*2 محتوى رئيسي */}
       <main className="flex-1 min-h-screen w-full overflow-y-auto bg-transparent p-0 m-0">
         {children}
       </main>
